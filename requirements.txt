@@ -3,3 +3,4 @@ pandas
 dvc
 scikit-learn
 kagglehub
+fastapi
