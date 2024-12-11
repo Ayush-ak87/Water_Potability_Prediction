@@ -3,6 +3,7 @@ import numpy as np
 import os
 from sklearn.model_selection import train_test_split
 import kagglehub
+import yaml
 
 # Download latest version
 path = kagglehub.dataset_download("uom190346a/water-quality-and-potability")
@@ -15,7 +16,9 @@ for file_name in os.listdir(path):
         print("Reading CSV file:", csv_path)
         data = pd.read_csv(csv_path)  # Read the CSV file into a pandas DataFrame
 
-train_data, test_data = train_test_split(data, test_size=0.2, random_state=42)
+test_size = yaml.safe_load(open("params.yaml"))["data_collection"]["test_size"]
+
+train_data, test_data = train_test_split(data, test_size=test_size, random_state=42)
 
 data_path = os.path.join("data", "raw")
 
